@@ -1,0 +1,215 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main menu bar */
+.menu {
+  background-color: #19235d;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  height: 60px;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Menu items */
+.menu-items {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Main menu items */
+.menu-items > li {
+  position: relative;
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+/* Home button styling */
+.menu-home {
+  background-color: #7f2ed5;
+}
+
+/* Hover effect on main items */
+.menu-items > li:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+
+/* Dropdown arrow indicator on desktop */
+.menu-dropdown::after {
+  content: " ▼";
+  font-size: 0.6em;
+  margin-left: 5px;
+}
+
+/* Desktop submenu styling */
+.menu-dropdown .submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #19235d;
+  border-radius: 6px;
+  min-width: 180px;
+  z-index: 100;
+  flex-direction: column;
+  padding: 5px 0;
+  list-style: none;
+}
+
+/* Show submenu on hover (desktop) */
+.menu-dropdown:hover .submenu {
+  display: flex;
+}
+
+/* Submenu items styling */
+.menu-dropdown .submenu li {
+  padding: 10px 15px;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+  color: #cfa6ff;
+}
+
+/* Hover on submenu items */
+.menu-dropdown .submenu li:hover {
+  background-color: #6024b8;
+}
+
+/* Hamburger menu styling */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+  user-select: none;
+}
+
+/* Hamburger bars */
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background-color: #fff;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Hamburger animation when active */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===========================
+   Responsive Mobile Styles
+   =========================== */
+@media (max-width: 768px) {
+  /* Mobile menu container */
+  .menu-items {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;  /* below header */
+    left: 0;
+    right: 0;
+    background-color: #19235d;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    z-index: 1001;
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* Show menu when active */
+  .menu-items.active {
+    display: flex;
+  }
+
+  /* Main menu items full width */
+  .menu-items > li {
+    width: 100%;
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #6024b8;
+    font-weight: bold;
+  }
+
+  /* Hide all siblings except the active dropdown when submenu active */
+  .menu-items.submenu-active > li:not(.active) {
+    display: none;
+  }
+
+  /* Remove desktop dropdown arrow */
+  .menu-dropdown::after {
+    content: "";
+  }
+
+  /* Mobile dropdown parent styling */
+  .menu-dropdown {
+    position: relative;
+  }
+
+  /* Add arrow for mobile dropdown parent */
+  .menu-dropdown::after {
+    content: "▸";
+    position: absolute;
+    right: 20px;
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    color: #cfa6ff;
+  }
+
+  /* Rotate arrow when active */
+  .menu-dropdown.active::after {
+    transform: rotate(90deg);
+  }
+
+  /* Mobile submenu container */
+  .menu-dropdown .submenu {
+    position: static;
+    display: none;
+    flex-direction: column;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+    list-style: none; /* remove bullet points */
+  }
+
+  /* Show submenu when active */
+  .menu-dropdown.active .submenu {
+    display: flex;
+  }
+
+  /* Submenu items styling */
+  .menu-dropdown .submenu li {
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: #cfa6ff;
+  }
+
+  /* Hamburger visible only on mobile */
+  .hamburger {
+    display: flex;
+  }
+}
