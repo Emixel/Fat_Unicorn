@@ -3,8 +3,6 @@ var router = express.Router();
 
 const loadHTML = require('../utils/loadHTML');
 
-
-
   let headerHTML;  
   let maininfoHTML;
   let bottomHTML;
@@ -17,9 +15,9 @@ try {
   console.error(err);
 }
 
-/* GET users listing. */
+// community page
 router.get('/', function(req, res, next) {
-  res.send(headerHTML + menuHTML + maininfoHTML + bottomHTML)
+  res.send(headerHTML + menuHTML + "Community page etc..." + bottomHTML)
 });
 
 

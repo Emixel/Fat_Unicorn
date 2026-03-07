@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 const loadHTML = require('../utils/loadHTML');
 
-
-
   let headerHTML;  
   let maininfoHTML;
   let bottomHTML;
