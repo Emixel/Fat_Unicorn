@@ -25,12 +25,12 @@ global.fetch = async function(url, options) {
 var app = require('../app');
 var server;
 
-function requestStats() {
+function request(path) {
   return new Promise(function(resolve, reject) {
     http.get({
       host: '127.0.0.1',
       port: server.address().port,
-      path: '/api/discord/stats',
+      path: path,
       headers: { Accept: 'application/json' }
     }, function(response) {
       var body = '';
@@ -61,7 +61,7 @@ test.after(async function() {
 });
 
 test('returns only public guild statistics and never the bot token', async function() {
-  var response = await requestStats();
+  var response = await request('/api/discord/stats');
   var body = JSON.parse(response.body);
 
   assert.equal(response.status, 200);
@@ -78,12 +78,36 @@ test('returns only public guild statistics and never the bot token', async funct
 
 test('limits statistics requests by client IP without re-fetching Discord', async function() {
   for (var index = 0; index < 59; index += 1) {
-    var allowed = await requestStats();
+    var allowed = await request('/api/discord/stats');
     assert.equal(allowed.status, 200);
   }
 
-  var limited = await requestStats();
+  var limited = await request('/api/discord/stats');
   assert.equal(limited.status, 429);
   assert.ok(Number(limited.headers['retry-after']) > 0);
   assert.equal(discordRequests, 1);
+});
+
+test('renders the separate pages with the matching navigation item selected', async function() {
+  var pages = [
+    { path: '/', heading: 'Gaming community', navigation: 'Welcome' },
+    { path: '/about', heading: 'Who we are', navigation: 'About Us' },
+    { path: '/about/joinus', heading: 'Who we are', navigation: 'About Us' },
+    { path: '/community/contentcreators', heading: 'Our streamers', navigation: 'Creators' },
+    { path: '/games/eventsTournaments', heading: 'Happenings', navigation: 'Events' },
+    { path: '/shop', heading: 'Merch', navigation: 'Merch' },
+    { path: '/community', heading: 'Games & live servers', navigation: 'Servers' },
+    { path: '/community/socials', heading: 'Games & live servers', navigation: 'Servers' },
+    { path: '/games/teamsStats', heading: 'Games & live servers', navigation: 'Servers' }
+  ];
+
+  for (var page of pages) {
+    var response = await request(page.path);
+    assert.equal(response.status, 200, page.path + ' should render');
+    assert.ok(response.body.includes(page.heading), page.path + ' should show its page content');
+    assert.ok(
+      response.body.includes('aria-current="page">' + page.navigation),
+      page.path + ' should mark its navigation item current'
+    );
+  }
 });

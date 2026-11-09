@@ -1,0 +1,38 @@
+extends ../../masterframe/layout.pug
+
+block content
+  section.content-page.about-page(aria-labelledby="page-title")
+    header.page-heading
+      p.eyebrow About us
+      h1#page-title.page-title Who we are
+      p.page-lede Born from late-night gaming sessions and too many pizzas, The Fat Unicorns is a chill, welcoming home for gamers of every skill level.
+
+    .video-frame
+      iframe(
+        src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"
+        title="The Fat Unicorns community video"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      )
+
+    section.team-section(aria-labelledby="team-heading")
+      h2.section-title#team-heading Important peepz
+      .team-grid
+        article.team-card
+          span.team-avatar(aria-hidden="true") B
+          h3 Big Sparkle
+          p Founder
+        article.team-card
+          span.team-avatar(aria-hidden="true") C
+          h3 Chonkhorn
+          p Community Lead
+        article.team-card
+          span.team-avatar(aria-hidden="true") G
+          h3 Glitterbelly
+          p Event Manager
+        article.team-card
+          span.team-avatar(aria-hidden="true") R
+          h3 Rainbow Byte
+          p Server Admin

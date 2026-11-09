@@ -59,6 +59,8 @@ router.get('/stats', rateLimit, async function(req, res) {
     });
   } catch (error) {
     var retryAfter = error && Number.isSafeInteger(error.retryAfter) ? error.retryAfter : 15;
+    var reason = error && typeof error.code === 'string' ? error.code : 'unexpected_error';
+    console.error('Discord statistics unavailable:', reason);
     res.set('Retry-After', String(Math.max(1, retryAfter)));
     res.status(503).json({ error: 'Statistics are temporarily unavailable.' });
   }

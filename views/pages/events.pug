@@ -1,0 +1,30 @@
+extends ../../masterframe/layout.pug
+
+block content
+  section.content-page events-page(aria-labelledby="page-title")
+    header.page-heading
+      p.eyebrow Events
+      h1#page-title.page-title Happenings
+      p.page-lede Mark your calendar — the herd gathers often.
+
+    .event-list
+      article.event-card
+        time.event-date(datetime="2026-11-14") Nov 14
+        .event-details
+          h2 Friday Game Night
+          p Casual chaos — Among Us, Gartic & more.
+      article.event-card
+        time.event-date(datetime="2026-11-22") Nov 22
+        .event-details
+          h2 Unicorn Cup: CS2
+          p 5v5 community tournament with prizes.
+      article.event-card
+        time.event-date(datetime="2026-12-06") Dec 6
+        .event-details
+          h2 Minecraft Build-Off
+          p Theme: Winter Unicorn Palace.
+      article.event-card
+        time.event-date(datetime="2026-12-20") Dec 20
+        .event-details
+          h2 Holiday Stream Marathon
+          p 12 hours of streams with all our creators.

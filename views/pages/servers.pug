@@ -1,0 +1,35 @@
+extends ../../masterframe/layout.pug
+
+block content
+  section.content-page servers-page(aria-labelledby="page-title")
+    header.page-heading
+      p.eyebrow Play with us
+      h1#page-title.page-title Games & live servers
+      p.page-lede Hop in — no gatekeeping, just good vibes.
+
+    .server-grid
+      article.server-card
+        span.server-status.is-online Online
+        h2 Minecraft
+        p.server-address mc.fatunicorns.gg
+        p.server-players 18/50
+      article.server-card
+        span.server-status.is-online Online
+        h2 Rust
+        p.server-address rust.fatunicorns.gg
+        p.server-players 42/100
+      article.server-card
+        span.server-status.is-offline Offline
+        h2 CS2
+        p.server-address cs.fatunicorns.gg
+        p.server-players 0/20
+      article.server-card
+        span.server-status.is-online Online
+        h2 Discord
+        p.server-address discord.gg/fatunicorns
+        p.server-players
+          span(data-discord-online, aria-live="polite", aria-busy="true") Loading…
+          |  online
+
+block scripts
+  script(src="/javascripts/discord-stats.js" defer)

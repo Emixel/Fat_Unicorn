@@ -4,15 +4,15 @@ nav.menu(aria-label="Main navigation")
     span
     span
   ul.menu-items#primary-navigation
-    li.menu-home
-      a(href="/") Welcome
-    li
-      a(href="/about") About Us
-    li
-      a(href="/community/contentcreators") Creators
-    li
-      a(href="/games/eventsTournaments") Events
-    li
-      a(href="/shop") Merch
-    li
-      a(href="/community") Servers
+    li(class=activePage === "welcome" ? "menu-home" : "")
+      a(href="/", aria-current=activePage === "welcome" ? "page" : null) Welcome
+    li(class=activePage === "about" ? "menu-home" : "")
+      a(href="/about", aria-current=activePage === "about" ? "page" : null) About Us
+    li(class=activePage === "creators" ? "menu-home" : "")
+      a(href="/community/contentcreators", aria-current=activePage === "creators" ? "page" : null) Creators
+    li(class=activePage === "events" ? "menu-home" : "")
+      a(href="/games/eventsTournaments", aria-current=activePage === "events" ? "page" : null) Events
+    li(class=activePage === "merch" ? "menu-home" : "")
+      a(href="/shop", aria-current=activePage === "merch" ? "page" : null) Merch
+    li(class=activePage === "servers" ? "menu-home" : "")
+      a(href="/community", aria-current=activePage === "servers" ? "page" : null) Servers

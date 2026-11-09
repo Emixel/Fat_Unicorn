@@ -3,13 +3,19 @@ var router = express.Router();
 
 // about page
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('pages/about', {
+    activePage: 'about',
+    pageTitle: 'About Us | The Fat Unicorns'
+  });
 });
 
 
 // Join us page
 router.get('/joinus', function(req, res, next) {
-  res.render('index');
+  res.render('pages/about', {
+    activePage: 'about',
+    pageTitle: 'About Us | The Fat Unicorns'
+  });
 });
 
 

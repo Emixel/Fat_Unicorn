@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const totalMembers = document.querySelector('[data-stat="totalMembers"]');
   const onlineMembers = document.querySelector('[data-stat="onlineMembers"]');
+  const discordOnline = document.querySelector('[data-discord-online]');
   const stats = document.querySelector('.stats');
 
-  if (!totalMembers || !onlineMembers || !stats) return;
+  if ((!totalMembers || !onlineMembers || !stats) && !discordOnline) return;
 
   let hasLoadedStats = false;
 
@@ -32,19 +33,31 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('Invalid statistics response');
       }
 
-      totalMembers.textContent = data.totalMembers.toLocaleString();
-      onlineMembers.textContent = data.onlineMembers.toLocaleString();
-      totalMembers.setAttribute('aria-busy', 'false');
-      onlineMembers.setAttribute('aria-busy', 'false');
-      stats.setAttribute('aria-label', `${data.serverName} community highlights`);
-      stats.dataset.stale = String(data.stale === true);
+      if (totalMembers && onlineMembers && stats) {
+        totalMembers.textContent = data.totalMembers.toLocaleString();
+        onlineMembers.textContent = data.onlineMembers.toLocaleString();
+        totalMembers.setAttribute('aria-busy', 'false');
+        onlineMembers.setAttribute('aria-busy', 'false');
+        stats.setAttribute('aria-label', `${data.serverName} community highlights`);
+        stats.dataset.stale = String(data.stale === true);
+      }
+
+      if (discordOnline) {
+        discordOnline.textContent = data.onlineMembers.toLocaleString();
+        discordOnline.setAttribute('aria-busy', 'false');
+      }
+
       hasLoadedStats = true;
     } catch (error) {
-      if (!hasLoadedStats) {
+      if (!hasLoadedStats && totalMembers && onlineMembers) {
         totalMembers.textContent = 'Unavailable';
         onlineMembers.textContent = 'Unavailable';
         totalMembers.setAttribute('aria-busy', 'false');
         onlineMembers.setAttribute('aria-busy', 'false');
+      }
+      if (!hasLoadedStats && discordOnline) {
+        discordOnline.textContent = 'Unavailable';
+        discordOnline.setAttribute('aria-busy', 'false');
       }
     } finally {
       clearTimeout(timeout);
