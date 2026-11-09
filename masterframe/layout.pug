@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title The fat Unicorns
+    link(rel="stylesheet", href="/stylesheets/menu.css")
+    link(rel="stylesheet", href="/stylesheets/index.css")
+    script(src="/javascripts/menu.js")
+  body
+        include header.pug
+        include menu.pug
+        
+        main.container
+            block content
+        
+        include bottom.pug
+        
+        script(src="/javascripts/menu.js")
+        block scripts
