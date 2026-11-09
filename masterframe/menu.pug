@@ -1,29 +1,18 @@
-nav.menu
-  ul.menu-items
+nav.menu(aria-label="Main navigation")
+  button.hamburger(type="button", aria-label="Open menu", aria-expanded="false", aria-controls="primary-navigation")
+    span
+    span
+    span
+  ul.menu-items#primary-navigation
     li.menu-home
-      a(href="/") Home
-    li.menu-dropdown
-      a(href="/community") Community
-      ul.submenu
-        a(href="/community/socials")
-          li Socials
-        a(href="/community/contentcreators")
-          li Content Creators
+      a(href="/", aria-current="page") Welcome
     li
-      a(href="/shop") Shop
-    li.menu-dropdown
-      a(href="/games") Games
-      ul.submenu
-        li
-          a(href="/games/eventsTournaments") Event & Tournaments
-        li
-          a(href="/games/teamsStats") Teams & Stats
-    li.menu-dropdown
       a(href="/about") About Us
-      ul.submenu
-        li
-          a(href="/about/joinus") Join Us
-  .hamburger
-    span
-    span
-    span
+    li
+      a(href="/community/contentcreators") Creators
+    li
+      a(href="/games/eventsTournaments") Events
+    li
+      a(href="/shop") Merch
+    li
+      a(href="/community") Servers

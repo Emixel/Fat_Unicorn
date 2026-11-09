@@ -3,18 +3,20 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title The fat Unicorns
+    meta(name="theme-color", content="#0b1233")
+    title The Fat Unicorns | Gaming Community
     link(rel="stylesheet", href="/stylesheets/menu.css")
     link(rel="stylesheet", href="/stylesheets/index.css")
     script(src="/javascripts/menu.js")
   body
+    .site-shell
+      .site-header
         include header.pug
         include menu.pug
-        
-        main.container
-            block content
-        
-        include bottom.pug
-        
-        script(src="/javascripts/menu.js")
-        block scripts
+
+      main.container
+        block content
+
+      include bottom.pug
+
+    block scripts

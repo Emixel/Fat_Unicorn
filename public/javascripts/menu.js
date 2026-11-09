@@ -1,54 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const menuItems = document.querySelector('.menu-items');
-  const dropdowns = document.querySelectorAll('.menu-dropdown');
+  const menuLinks = document.querySelectorAll('.menu-items a');
 
-  // Toggle main menu
-  hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menuItems.classList.toggle('active');
-    hamburger.classList.toggle('active');
+  if (!hamburger || !menuItems) return;
 
-    // Reset submenu state on menu open/close
-    menuItems.classList.remove('submenu-active');
-    dropdowns.forEach(d => d.classList.remove('active'));
+  hamburger.addEventListener('click', () => {
+    const isOpen = menuItems.classList.toggle('active');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
   });
 
-  // Close menu if clicking outside
   document.addEventListener('click', () => {
     if (window.innerWidth <= 768) {
-      menuItems.classList.remove('active', 'submenu-active');
+      menuItems.classList.remove('active');
       hamburger.classList.remove('active');
-      dropdowns.forEach(d => d.classList.remove('active'));
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
     }
   });
 
-  // Prevent clicks inside menu from closing it
-  menuItems.addEventListener('click', (e) => {
-    e.stopPropagation();
+  menuItems.addEventListener('click', (event) => {
+    event.stopPropagation();
   });
 
-  // Handle dropdown clicks
-  dropdowns.forEach(menu => {
-    menu.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768) {
-        e.stopPropagation();
+  hamburger.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
 
-        const isActive = menu.classList.contains('active');
-
-        // Close all dropdowns and show all main items if closing submenu
-        if (isActive) {
-          menu.classList.remove('active');
-          menuItems.classList.remove('submenu-active');
-        } else {
-          // Close all others
-          dropdowns.forEach(d => d.classList.remove('active'));
-          // Activate clicked submenu
-          menu.classList.add('active');
-          // Hide siblings (show only active dropdown)
-          menuItems.classList.add('submenu-active');
-        }
-      }
+  menuLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      menuItems.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
     });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      menuItems.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
+    }
   });
 });
