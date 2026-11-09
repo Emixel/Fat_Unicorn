@@ -3,7 +3,7 @@ section.homepage(aria-labelledby="welcome-heading")
     .hero-copy
       p.eyebrow Gaming community
       h1#welcome-heading
-        | The 
+        | The
         span Fat
         br
         | Unicorns
@@ -16,11 +16,11 @@ section.homepage(aria-labelledby="welcome-heading")
 
   .stats(aria-label="Community highlights")
     article.stat-card
-      h2 159
-      p Unicorns
+      h2.stat-value(data-stat="totalMembers", aria-live="polite", aria-busy="true") Loading…
+      p Total Members
     article.stat-card
-      h2 24/7
-      p Servers online
+      h2.stat-value(data-stat="onlineMembers", aria-live="polite", aria-busy="true") Loading…
+      p Unicorns Online
     article.stat-card
       h2 Weekly
       p Game nights
